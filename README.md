@@ -29,7 +29,11 @@ API Restful desarrollada con **NestJS** que permite la gestión de citas médica
 
 ---
 
-## 🚀 Instalación  
+## 🚀 Instalación y Requisitos
+
+- TODO
+- Docker
+- node
 
 ```bash
 # Clonar el repositorio
@@ -161,6 +165,7 @@ src/
 
 - [![NestJS][nestjs-badge]][nestjs-url] Framework para construir aplicaciones server-side eficientes y escalables.
 - [![TypeScript][typescript-badge]][typescript-url] Superset de JavaScript con tipado estático.
+- TODO: Docker
 - [![PostgreSQL][postgresql-badge]][postgresql-url] Sistema de base de datos relacional avanzado.
 - TODO: TypeORM
 - [![Jest][jest-badge]][jest-url] Framework de testing con enfoque en simplicidad.
