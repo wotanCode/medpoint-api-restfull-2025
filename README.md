@@ -171,6 +171,7 @@ src/
 ## 👨‍💻 Autor
 
 Desarrollado con ❤️ por Pedro Yanez
+
 [![GitHub][github-badge]][github-url] [![LinkedIn][linkedin-badge]][linkedin-url]
 
 ---
