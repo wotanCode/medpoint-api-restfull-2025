@@ -53,21 +53,21 @@ npm install
 
 ## ▶️ Ejecución
 
-1. Clonar archivo `.env.template` y renombrar a `.env`
-2. Cambiar las variables de entorno acorde a uso.
-3. Levantar base de datos
+1. Clonar el archivo `.env.template` y renombrarlo a `.env`.
+2. Ajustar las variables de entorno según el uso. (Se pueden dejar los valores por defecto).
+3. Levantar la base de datos.
 
 ```sh
 docker-compose up -d
 ```
 
-6. Levantar proyecto:
+4. Levantar proyecto:
 
 ```sh
 npm run start:dev
 ```
 
-7. Ejecutar Seed. Get method
+5. Ejecutar Seed. Get method
 
 ```sh
 http://localhost:3000/api/seed
