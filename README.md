@@ -29,26 +29,45 @@ API Restful desarrollada con **NestJS** que permite la gestión de citas médica
 
 ---
 
-## 🚀 Instalación y Requisitos
+## 🚀 Requisitos y instalación 
 
-- TODO
-- Docker
-- node
+Antes de comenzar, asegúrate de tener instalados los siguientes programas:
+
+- [Node.js][nodejs-url] – Entorno de ejecución para JavaScript del lado del servidor.
+- [Docker][docker-url] – Plataforma para contenedores que facilita la ejecución de la base de datos y otros servicios.
 
 ```bash
 # Clonar el repositorio
-git clone https://github.com/wotancode/medpoint.git
+git clone https://github.com/wotanCode/medpoint-api-restfull-2025.git
 
 # Ingresar al proyecto
 cd medpoint
 
 # Instalar dependencias
 npm install
-```
 
----
 
 ## ▶️ Ejecución
+
+1. Clonar archivo `.env.template` y renombrar a `.env`
+2. Cambiar las variables de entorno acorde a uso.
+3. Levantar base de datos
+
+```sh
+docker-compose up -d
+```
+
+6. Levantar proyecto:
+
+```sh
+npm run start:dev
+```
+
+7. Ejecutar Seed. Get method
+
+```sh
+http://localhost:3000/api/seed
+```
 
 ```bash
 # Modo desarrollo
@@ -61,7 +80,7 @@ npm run start:prod
 
 ---
 
-## 🧪 Pruebas
+<!-- ## 🧪 Pruebas
 
 ```bash
 # Unitarias
@@ -74,9 +93,9 @@ npm run test:e2e
 npm run test:cov
 ```
 
----
+--- -->
 
-## ⚙️ Endpoints principales
+<!-- ## ⚙️ Endpoints principales
 
 ### 📌 Paciente
 
@@ -85,15 +104,15 @@ npm run test:cov
 * `POST /appointments/:id/pay` → Pagar cita (sandbox).
 * `GET /appointments/mine` → Ver citas propias. -->
 
-### 📌 Médico
+<!-- ### 📌 Médico
 
-- TODO
+- TODO -->
 <!-- * `PATCH /appointments/:id/confirm` → Confirmar o rechazar cita (sólo si fue pagada).
 * `GET /appointments/today` → Ver citas del día.
 
 > Todos los endpoints requieren autenticación mediante token en el header. -->
 
----
+--- -->
 
 ## 👮‍♂️ Roles y permisos
 
@@ -165,9 +184,9 @@ src/
 
 - [![NestJS][nestjs-badge]][nestjs-url] Framework para construir aplicaciones server-side eficientes y escalables.
 - [![TypeScript][typescript-badge]][typescript-url] Superset de JavaScript con tipado estático.
-- TODO: Docker
+- [![Docker][docker-badge]][docker-url] Plataforma para desarrollar, enviar y ejecutar aplicaciones dentro de contenedores.
 - [![PostgreSQL][postgresql-badge]][postgresql-url] Sistema de base de datos relacional avanzado.
-- TODO: TypeORM
+- [![TypeORM][typeorm-badge]][typeorm-url] ORM para TypeScript y JavaScript compatible con múltiples bases de datos.
 - [![Jest][jest-badge]][jest-url] Framework de testing con enfoque en simplicidad.
 - [![Passport][passport-badge]][passport-url] Middleware de autenticación para Node.js.
 - [![Class Validator][classvalidator-badge]][classvalidator-url] Validación basada en decoradores para TypeScript.
@@ -187,12 +206,17 @@ Desarrollado con ❤️ por Pedro Yanez
 Este proyecto está bajo la licencia MIT. Consulta el archivo `LICENSE` para más detalles.
 
 <!-- Fuente de la verdad -->
+[nodejs-url]: https://nodejs.org/
 [nestjs-url]: https://nestjs.com/
 [nestjs-badge]: https://img.shields.io/badge/NestJS-E0234E?style=for-the-badge&logo=nestjs&logoColor=white
 [typescript-url]: https://www.typescriptlang.org/
 [typescript-badge]: https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white
+[docker-url]: https://www.docker.com/
+[docker-badge]: https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white
 [postgresql-url]: https://www.postgresql.org/
 [postgresql-badge]: https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white
+[typeorm-url]: https://typeorm.io/
+[typeorm-badge]: https://img.shields.io/badge/TypeORM-262627?style=for-the-badge&logo=typeorm&logoColor=white
 [jest-url]: https://jestjs.io/
 [jest-badge]: https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest&logoColor=white
 [passport-url]: http://www.passportjs.org/
