@@ -1,10 +1,10 @@
 {
   "name": "medpoint",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "API Restful desarrollada con NestJS que permite la gestión de citas médicas para pacientes y médicos.",
+  "author": "Pedro Yanez",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
