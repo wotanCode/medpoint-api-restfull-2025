@@ -1,4 +1,4 @@
-# 🏥 MedPoint API — Gestión de Citas Médicas con NestJS
+# 🏥 MedPoint API
 
 API Restful desarrollada con **NestJS** que permite la gestión de citas médicas para pacientes y médicos.
 
