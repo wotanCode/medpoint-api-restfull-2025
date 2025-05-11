@@ -36,16 +36,20 @@ Antes de comenzar, asegúrate de tener instalados los siguientes programas:
 - [Node.js][nodejs-url] – Entorno de ejecución para JavaScript del lado del servidor.
 - [Docker][docker-url] – Plataforma para contenedores que facilita la ejecución de la base de datos y otros servicios.
 
-```bash
+```sh
 # Clonar el repositorio
 git clone https://github.com/wotanCode/medpoint-api-restfull-2025.git
+```
 
+```sh
 # Ingresar al proyecto
 cd medpoint
+```
 
+```sh
 # Instalar dependencias
 npm install
-
+```
 
 ## ▶️ Ejecución
 
