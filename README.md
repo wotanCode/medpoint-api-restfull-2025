@@ -162,6 +162,7 @@ src/
 - [![NestJS][nestjs-badge]][nestjs-url] Framework para construir aplicaciones server-side eficientes y escalables.
 - [![TypeScript][typescript-badge]][typescript-url] Superset de JavaScript con tipado estático.
 - [![PostgreSQL][postgresql-badge]][postgresql-url] Sistema de base de datos relacional avanzado.
+- TODO: TypeORM
 - [![Jest][jest-badge]][jest-url] Framework de testing con enfoque en simplicidad.
 - [![Passport][passport-badge]][passport-url] Middleware de autenticación para Node.js.
 - [![Class Validator][classvalidator-badge]][classvalidator-url] Validación basada en decoradores para TypeScript.
