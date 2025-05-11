@@ -116,7 +116,7 @@ npm run test:cov
 
 > Todos los endpoints requieren autenticación mediante token en el header. -->
 
---- -->
+---
 
 ## 👮‍♂️ Roles y permisos
 
