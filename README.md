@@ -19,13 +19,13 @@ API Restful desarrollada con **NestJS** que permite la gestión de citas médica
 
 ## 📌 Principios y buenas prácticas aplicadas
 
-✅ Principios **SOLID**
-✅ Programación orientada a objetos
-✅ Arquitectura orientada a **dominio y responsabilidades claras**
-✅ Uso de **DTOs, services, guards, interceptors y pipes**
-✅ Pruebas unitarias y end-to-end
-✅ Control de errores centralizado
-✅ Estructura limpia y mantenible
+- ✅ Principios **SOLID**
+- ✅ Programación orientada a objetos
+- ✅ Arquitectura orientada a **dominio y responsabilidades claras**
+- ✅ Uso de **DTOs, services, guards, interceptors y pipes**
+- ✅ Pruebas unitarias y end-to-end
+- ✅ Control de errores centralizado
+- ✅ Estructura limpia y mantenible
 
 ---
 
