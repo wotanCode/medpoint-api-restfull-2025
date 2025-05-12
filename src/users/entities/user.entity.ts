@@ -3,7 +3,10 @@ import {
   PrimaryGeneratedColumn,
   Column,
   OneToMany,
+  BeforeInsert,
+  BeforeUpdate,
 } from 'typeorm';
+import { BadRequestException } from '@nestjs/common';
 
 import { Appointment } from '../../appointments/entities/appointment.entity';
 import { ValidRoles } from '../../interfaces';
@@ -50,4 +53,23 @@ export class User {
   // Relación con citas como doctor
   @OneToMany(() => Appointment, appointment => appointment.doctor)
   appointmentsAsDoctor: Appointment[];
+
+  // Verificamos uso de caracteres especiales
+  @BeforeInsert()
+  validateUserNameWithOutSpecialCharacters() {
+    const validCharacters = /^[a-zA-Z0-9]+$/;
+
+    if (!validCharacters.test(this.username)) {
+      throw new BadRequestException('The username can only contain letters and numbers.');
+    }
+  }
+
+  @BeforeUpdate()
+  validateUserNameWithOutSpecialCharactersOnUpdate() {
+    const validCharacters = /^[a-zA-Z0-9]+$/;
+
+    if (!validCharacters.test(this.username)) {
+      throw new BadRequestException('The username can only contain letters and numbers.');
+    }
+  }
 }
