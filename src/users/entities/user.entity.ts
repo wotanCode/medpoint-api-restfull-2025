@@ -1,7 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToMany,
+} from 'typeorm';
 
+import { Appointment } from '../../appointments/entities/appointment.entity';
 import { ValidRoles } from '../../interfaces';
-// import { Doctor } from './doctor.entity';
 
 @Entity('users')
 export class User {
@@ -38,6 +43,11 @@ export class User {
   @Column({ type: 'timestamp', name: 'token_created_at', nullable: true })
   tokenCreatedAt?: Date;
 
-  // @OneToOne(() => Doctor, doctor => doctor.user)
-  // doctor?: Doctor;
+  // Relación con citas como paciente
+  @OneToMany(() => Appointment, appointment => appointment.patient)
+  appointmentsAsPatient: Appointment[];
+
+  // Relación con citas como doctor
+  @OneToMany(() => Appointment, appointment => appointment.doctor)
+  appointmentsAsDoctor: Appointment[];
 }
