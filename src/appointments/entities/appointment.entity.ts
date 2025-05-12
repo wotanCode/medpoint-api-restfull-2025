@@ -7,13 +7,7 @@ import {
 } from 'typeorm';
 
 import { User } from '../../users/entities/user.entity';
-
-export enum AppointmentStatus {
-  scheduled = 'scheduled',
-  paid = 'paid',
-  confirmed = 'confirmed',
-  cancelled = 'cancelled',
-}
+import { AppointmentStatus } from 'src/interfaces';
 
 @Entity('appointments')
 export class Appointment {
