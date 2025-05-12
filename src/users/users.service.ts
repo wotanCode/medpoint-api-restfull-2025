@@ -20,17 +20,16 @@ export class UsersService {
   ) { }
 
 
-async create(createUserDto: CreateUserDto): Promise<User> {
-  try {
-    const user = this.userRepository.create(createUserDto);
-    await this.userRepository.save(user);
-    return user;
-  } catch (error) {
-    this.handleDBExceptions(error);
-    throw error;
+  async create(createUserDto: CreateUserDto): Promise<User> {
+    try {
+      const user = this.userRepository.create(createUserDto);
+      await this.userRepository.save(user);
+      return user;
+    } catch (error) {
+      this.handleDBExceptions(error);
+      throw error;
+    }
   }
-}
-
 
   // Todos los usuarios
   findAll() {
