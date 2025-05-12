@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/users.module';
 import { AppointmentsModule } from './appointments/appointments.module';
 import { PaymentsModule } from './payments/payments.module';
 import { SeedModule } from './seed/seed.module';
@@ -20,7 +20,7 @@ import { SeedModule } from './seed/seed.module';
       synchronize: true,
     }),
     SeedModule,
-    UsersModule,
+    AuthModule,
     AppointmentsModule,
     PaymentsModule,
   ],

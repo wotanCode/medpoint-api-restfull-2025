@@ -9,7 +9,6 @@ import {
 import { BadRequestException } from '@nestjs/common';
 
 import { Appointment } from '../../appointments/entities/appointment.entity';
-import { ValidRoles } from '../../interfaces';
 
 @Entity('users')
 export class User {
