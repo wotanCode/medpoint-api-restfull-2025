@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { AppointmentsModule } from './appointments/appointments.module';
 import { PaymentsModule } from './payments/payments.module';
+import { SeedModule } from './seed/seed.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { PaymentsModule } from './payments/payments.module';
       autoLoadEntities: true,
       synchronize: true,
     }),
+    SeedModule,
     UsersModule,
     AppointmentsModule,
     PaymentsModule,

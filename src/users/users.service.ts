@@ -20,16 +20,17 @@ export class UsersService {
   ) { }
 
 
-  async create(createUserDto: CreateUserDto) {
-    try {
-      const user = this.userRepository.create(createUserDto)
-      await this.userRepository.save(user);
-      return user;
-
-    } catch (error) {
-      this.handleDBExceptions(error);
-    }
+async create(createUserDto: CreateUserDto): Promise<User> {
+  try {
+    const user = this.userRepository.create(createUserDto);
+    await this.userRepository.save(user);
+    return user;
+  } catch (error) {
+    this.handleDBExceptions(error);
+    throw error;
   }
+}
+
 
   // Todos los usuarios
   findAll() {
@@ -73,6 +74,13 @@ export class UsersService {
   async remove(id: string) {
     const user = await this.findOne(id);
     await this.userRepository.remove(user);
+  }
+
+  deleteAllUsers() {
+    this.userRepository.createQueryBuilder()
+      .delete()
+      .where({})
+      .execute();
   }
 
   // Manejo de errores de la bd
