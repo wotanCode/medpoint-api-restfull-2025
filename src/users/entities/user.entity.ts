@@ -22,11 +22,17 @@ export class User {
   @Column()
   password: string;
 
-  @Column({ type: 'enum', enum: ValidRoles })
-  role: ValidRoles;
+  @Column('text', {
+    array: true,
+    default: ['patient'],
+  })
+  role: string[];
 
   @Column({ name: 'full_name', length: 100 })
   fullName: string;
+
+  @Column('bool', {})
+  isActive: boolean
 
   @Column({ type: 'date', name: 'date_of_birth' })
   dateOfBirth: string;

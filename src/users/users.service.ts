@@ -75,6 +75,7 @@ export class UsersService {
     await this.userRepository.remove(user);
   }
 
+  // Solo para el seed
   deleteAllUsers() {
     this.userRepository.createQueryBuilder()
       .delete()
