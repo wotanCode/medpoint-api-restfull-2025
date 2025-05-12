@@ -24,6 +24,7 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
+  // Obtenemos un usuario en base al id o email
   @Get(':term')
   findOne(@Param('term') term: string) {
     return this.usersService.findOne(term);
