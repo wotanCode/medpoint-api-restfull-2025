@@ -6,12 +6,7 @@ import {
   JoinColumn,
 } from 'typeorm';
 import { Appointment } from '../../appointments/entities/appointment.entity';
-
-export enum PaymentStatus {
-  pending = 'pending',
-  completed = 'completed',
-  failed = 'failed',
-}
+import { PaymentStatus } from 'src/interfaces';
 
 @Entity('payments')
 export class Payment {
