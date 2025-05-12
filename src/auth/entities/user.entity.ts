@@ -15,7 +15,7 @@ export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ unique: true, length: 100, nullable: true })
+  @Column({ type: 'varchar', length: 100, unique: true })
   email: string;
 
   @Column('text', {
@@ -33,7 +33,7 @@ export class User {
   fullName: string;
 
   @Column('bool', { default: true })
-  isActive?: boolean
+  isActive: boolean
 
   @Column({ type: 'date', name: 'date_of_birth' })
   dateOfBirth: string;
@@ -58,22 +58,13 @@ export class User {
   @OneToMany(() => Appointment, appointment => appointment.doctor)
   appointmentsAsDoctor: Appointment[];
 
-  // Verificamos uso de caracteres especiales
+  // Verificamos email
   @BeforeInsert()
+  @BeforeUpdate()
   validateEmail() {
     const validCharacters = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    if (!validCharacters.test(this.email)) {
-      throw new BadRequestException('The email need be a valid email');
-    }
-  }
-
-  @BeforeUpdate()
-  validateEmailOnUpdate() {
-    const validCharacters = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;;
-
-    if (!validCharacters.test(this.email)) {
-      throw new BadRequestException('The email need be a valid email');
+    if (!this.email || !validCharacters.test(this.email)) {
+      throw new BadRequestException('The email must be valid');
     }
   }
 }
