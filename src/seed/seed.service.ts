@@ -27,7 +27,7 @@ export class SeedService {
     const insertPromises: Promise<User>[] = [];
 
     users.forEach(user => {
-      insertPromises.push(this.usersService.create(user));
+      insertPromises.push(this.usersService.createUser(user));
     });
 
     await Promise.all(insertPromises);

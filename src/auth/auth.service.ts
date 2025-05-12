@@ -22,7 +22,28 @@ export class AuthService {
 
 
   // Registramos un usuario
-  async create(createUserDto: CreateUserDto): Promise<User> {
+  async createUser(createUserDto: CreateUserDto): Promise<User> {
+    try {
+
+      // Encriptamos la contraseña
+      const { password, ...userData } = createUserDto;
+
+      const user = this.userRepository.create({
+        ...userData,
+        password: bcrypt.hashSync(password, 10),
+      });
+
+      await this.userRepository.save(user);
+      // delete user.password;
+      return user;
+    } catch (error) {
+      this.handleDBExceptions(error);
+      throw error;
+    }
+  }
+
+  // Registramos un usuario
+  async loginUser(createUserDto: CreateUserDto): Promise<User> {
     try {
 
       // Encriptamos la contraseña
