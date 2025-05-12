@@ -11,17 +11,16 @@ import {
 import { ValidRoles } from '../../interfaces';
 
 export class CreateUserDto {
-  @IsString()
-  @IsNotEmpty()
-  @Length(3, 50)
-  username: string;
+  @IsEmail()
+  @Length(5, 100)
+  email: string;
 
   @IsString()
   @IsNotEmpty()
   @Matches(
     /(?:(?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
     message: 'The password must have a Uppercase, lowercase letter and a number'
-})
+  })
   password: string;
 
   // @IsEnum(ValidRoles, { each: true })
@@ -41,10 +40,7 @@ export class CreateUserDto {
   @Length(5, 20)
   phone?: string;
 
-  @IsOptional()
-  @IsEmail()
-  @Length(5, 100)
-  email?: string;
+
 
   @IsOptional()
   @IsString()

@@ -15,10 +15,12 @@ export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ unique: true, length: 50 })
-  username: string;
+  @Column({ unique: true, length: 100, nullable: true })
+  email: string;
 
-  @Column()
+  @Column('text', {
+    select: false,
+  })
   password: string;
 
   @Column('text', {
@@ -30,7 +32,7 @@ export class User {
   @Column({ name: 'full_name', length: 100 })
   fullName: string;
 
-  @Column('bool', {default: true})
+  @Column('bool', { default: true })
   isActive?: boolean
 
   @Column({ type: 'date', name: 'date_of_birth' })
@@ -38,9 +40,6 @@ export class User {
 
   @Column({ length: 20, nullable: true })
   phone?: string;
-
-  @Column({ length: 100, nullable: true })
-  email?: string;
 
   @Column({ length: 255, nullable: true })
   address?: string;
@@ -61,20 +60,20 @@ export class User {
 
   // Verificamos uso de caracteres especiales
   @BeforeInsert()
-  validateUserNameWithOutSpecialCharacters() {
-    const validCharacters = /^[a-zA-Z0-9]+$/;
+  validateEmail() {
+    const validCharacters = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (!validCharacters.test(this.username)) {
-      throw new BadRequestException('The username can only contain letters and numbers.');
+    if (!validCharacters.test(this.email)) {
+      throw new BadRequestException('The email need be a valid email');
     }
   }
 
   @BeforeUpdate()
-  validateUserNameWithOutSpecialCharactersOnUpdate() {
-    const validCharacters = /^[a-zA-Z0-9]+$/;
+  validateEmailOnUpdate() {
+    const validCharacters = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;;
 
-    if (!validCharacters.test(this.username)) {
-      throw new BadRequestException('The username can only contain letters and numbers.');
+    if (!validCharacters.test(this.email)) {
+      throw new BadRequestException('The email need be a valid email');
     }
   }
 }

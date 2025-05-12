@@ -1,13 +1,12 @@
 import { ValidRoles } from "src/interfaces";
 
 export interface SeedUser {
-    username: string;
+    email: string;
     password: string;
     role: ValidRoles[];
     fullName: string;
     dateOfBirth: string;
     phone?: string;
-    email?: string;
     address?: string;
     isActive: true;
 }
@@ -15,7 +14,6 @@ export interface SeedUser {
 export const initialData: { users: SeedUser[] } = {
     users: [
         {
-            username: 'adminUser01',
             password: 'AdminPass123!',
             role: [ValidRoles.admin],
             fullName: 'Alice Admin',
@@ -26,7 +24,6 @@ export const initialData: { users: SeedUser[] } = {
             isActive: true,
         },
         {
-            username: 'doctorBob',
             password: 'DocBob456!',
             role: [ValidRoles.doctor],
             fullName: 'Bob Doctor',
@@ -35,7 +32,7 @@ export const initialData: { users: SeedUser[] } = {
             isActive: true,
         },
         {
-            username: 'patientCharlie',
+            email: 'charlie@mymail.com',
             password: 'Patient789!',
             role: [ValidRoles.patient],
             fullName: 'Charlie Patient',
@@ -45,35 +42,32 @@ export const initialData: { users: SeedUser[] } = {
             isActive: true,
         },
         {
-            username: 'patientDiana',
+            email: 'diana.rivera@example.com',
             password: 'Diana123!',
             role: [ValidRoles.patient],
             fullName: 'Diana Rivera',
             dateOfBirth: '1992-03-15',
             phone: '3333333333',
-            email: 'diana.rivera@example.com',
             address: 'Calle 10 Sur, Medellín',
             isActive: true,
         },
         {
-            username: 'patientElias',
+            email: 'elias.torres@example.com',
             password: 'Elias456!',
             role: [ValidRoles.patient],
             fullName: 'Elías Torres',
             dateOfBirth: '2000-06-22',
             phone: '4444444444',
-            email: 'elias.torres@example.com',
             address: 'Av. Reforma 500, Ciudad de México',
             isActive: true,
         },
         {
-            username: 'patientFatima',
+            email: 'fatima.gonzalez@example.com',
             password: 'Fatima789!',
             role: [ValidRoles.patient],
             fullName: 'Fátima González',
             dateOfBirth: '1988-12-05',
             phone: '5555555555',
-            email: 'fatima.gonzalez@example.com',
             address: 'Rua das Flores 77, São Paulo',
             isActive: true,
         }

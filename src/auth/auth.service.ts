@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { validate as isUUID } from 'uuid';
+import * as bcrypt from 'bcrypt';
 
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -23,8 +24,17 @@ export class AuthService {
   // Registramos un usuario
   async create(createUserDto: CreateUserDto): Promise<User> {
     try {
-      const user = this.userRepository.create(createUserDto);
+
+      // Encriptamos la contraseña
+      const { password, ...userData } = createUserDto;
+
+      const user = this.userRepository.create({
+        ...userData,
+        password: bcrypt.hashSync(password, 10),
+      });
+
       await this.userRepository.save(user);
+      // delete user.password;
       return user;
     } catch (error) {
       this.handleDBExceptions(error);
@@ -43,7 +53,7 @@ export class AuthService {
     if (isUUID(term)) {
       user = await this.userRepository.findOneBy({ id: term });
     } else {
-      user = await this.userRepository.findOneBy({ username: term });
+      user = await this.userRepository.findOneBy({ email: term });
     }
 
     if (!user) {
