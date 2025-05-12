@@ -3,10 +3,13 @@ import {
   PrimaryGeneratedColumn,
   Column,
   ManyToOne,
+  OneToOne,
   JoinColumn,
 } from 'typeorm';
 
 import { User } from '../../users/entities/user.entity';
+import { Payment } from '../../payments/entities/payment.entity';
+
 import { AppointmentStatus } from 'src/interfaces';
 
 @Entity('appointments')
@@ -33,4 +36,8 @@ export class Appointment {
 
   @Column({ type: 'text', nullable: true })
   reason?: string;
+
+  // Relación con el pago
+  @OneToOne(() => Payment, payment => payment.appointment)
+  payment: Payment;
 }
