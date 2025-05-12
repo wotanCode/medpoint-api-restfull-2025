@@ -22,7 +22,7 @@ export class Payment {
   @JoinColumn({ name: 'appointment_id' })
   appointment: Appointment;
 
-  @Column('numeric', { default: 100})
+  @Column('float', { default: 100})
   amount: number;
 
   @Column({ type: 'timestamp', name: 'payment_time' })
