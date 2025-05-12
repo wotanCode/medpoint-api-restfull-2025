@@ -2,8 +2,6 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { DoctorsModule } from './doctors/doctors.module';
-
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -16,9 +14,9 @@ import { DoctorsModule } from './doctors/doctors.module';
       password: process.env.DB_PASSWORD,
       autoLoadEntities: true,
       synchronize: true,
-  }),
-    DoctorsModule,],
+    }),
+  ],
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule { }
