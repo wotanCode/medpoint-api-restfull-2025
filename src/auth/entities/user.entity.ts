@@ -30,8 +30,8 @@ export class User {
   @Column({ name: 'full_name', length: 100 })
   fullName: string;
 
-  @Column('bool', {})
-  isActive: boolean
+  @Column('bool', {default: true})
+  isActive?: boolean
 
   @Column({ type: 'date', name: 'date_of_birth' })
   dateOfBirth: string;

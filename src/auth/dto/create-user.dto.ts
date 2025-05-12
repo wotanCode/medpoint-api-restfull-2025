@@ -6,6 +6,7 @@ import {
   IsOptional,
   IsEmail,
   Length,
+  Matches,
 } from 'class-validator';
 import { ValidRoles } from '../../interfaces';
 
@@ -17,11 +18,15 @@ export class CreateUserDto {
 
   @IsString()
   @IsNotEmpty()
+  @Matches(
+    /(?:(?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
+    message: 'The password must have a Uppercase, lowercase letter and a number'
+})
   password: string;
 
-  @IsEnum(ValidRoles, { each: true })
-  @IsNotEmpty()
-  role: ValidRoles[];
+  // @IsEnum(ValidRoles, { each: true })
+  // @IsNotEmpty()
+  // role: ValidRoles[];
 
   @IsString()
   @IsNotEmpty()

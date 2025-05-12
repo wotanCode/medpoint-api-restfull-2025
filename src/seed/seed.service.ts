@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { UsersService } from '../auth/users.service';
+import { AuthService } from '../auth/auth.service';
 
 import { initialData } from './data/seed-data';
 import { User } from 'src/auth/entities/user.entity';
@@ -8,7 +8,7 @@ import { User } from 'src/auth/entities/user.entity';
 export class SeedService {
 
   constructor(
-    private readonly usersService: UsersService
+    private readonly usersService: AuthService
   ) { }
 
   async runSeed() {

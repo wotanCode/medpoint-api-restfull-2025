@@ -9,7 +9,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 
 @Injectable()
-export class UsersService {
+export class AuthService {
 
   private readonly logger = new Logger('UsersService')
 
@@ -20,6 +20,7 @@ export class UsersService {
   ) { }
 
 
+  // Registramos un usuario
   async create(createUserDto: CreateUserDto): Promise<User> {
     try {
       const user = this.userRepository.create(createUserDto);
