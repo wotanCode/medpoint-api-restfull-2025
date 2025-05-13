@@ -170,7 +170,7 @@ Este proyecto utiliza un sistema de autenticación basado en **JWT (JSON Web Tok
 
 ## 🧱 Base de Datos
 
-Este proyecto utiliza **PostgreSQL** (versión 14.3) como sistema de gestión de base de datos.
+Este proyecto utiliza **PostgreSQL** (versión 14.3) como sistema de gestión de base de datos. No es obligatorio para ejecutar el proyecto, pero en caso de que se deseé visualizar la BBDD, estas son las credenciales de ingreso.
 
 ### 📌 Detalles de conexión:
 
