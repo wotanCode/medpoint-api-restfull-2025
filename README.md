@@ -60,7 +60,7 @@ npm install
 ## ▶️ Ejecución
 
 1. Clonar el archivo `.env.template` y renombrarlo a `.env`.
-2. Ajustar las variables de entorno según el uso. (Se pueden dejar los valores por defecto).
+2. Ajustar las variables de entorno según el uso. (Se pueden dejar los valores por defecto, excepto la de stripe la cual debe ser real para procesar pagos, aunque sea modo sandbox).
 3. Levantar la base de datos.
 
 ```sh
@@ -98,10 +98,10 @@ Al ejecutar el **seed**, se insertarán los siguientes usuarios de prueba en la 
 |---------|----------------------------------|--------------|
 | **Admin** | `admin@admin.com`              | `Admin1234`  |
 | **Doctor** | `bob.doctor@example.com`      | `Doctor1234` |
-| **Patient 1** | `charlie@mymail.com`        | `Abcd1234`   |
-| **Patient 2** | `diana.rivera@example.com`   | `Abcd1234`   |
-| **Patient 3** | `elias.torres@example.com`   | `Abcd1234`   |
-| **Patient 4** | `fatima.gonzalez@example.com`| `Abcd1234`   |
+| **Patient** | `charlie@mymail.com`        | `Abcd1234`   |
+| **Patient** | `diana.rivera@example.com`   | `Abcd1234`   |
+| **Patient** | `elias.torres@example.com`   | `Abcd1234`   |
+| **Patient** | `fatima.gonzalez@example.com`| `Abcd1234`   |
 
 Utiliza estos usuarios para realizar pruebas de autenticación y roles dentro de la API. Recuerda iniciar sesión con alguno de los usuarios de prueba para poder probar los distintos servicios, ya que todos requieren autenticación y algunos requieren diferentes tipos de autorización. Al hacer el login, estos regresan un Bearer Token con el cual podras consumir los distintos servicios.
 

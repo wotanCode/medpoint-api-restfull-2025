@@ -18,7 +18,7 @@ export class AppointmentsService {
 
   // Crea una nueva cita médica con validaciones de horario y disponibilidad
   async create(createAppointmentDto: CreateAppointmentDto, patientId: string) {
-    const { doctorId, appointmentTime, reason } = createAppointmentDto;
+    const { doctorId, appointmentTime, reason, amount } = createAppointmentDto;
     
     // Validar que el doctor existe y tiene el rol de doctor
     const doctor = await this.userRepository.findOne({
@@ -60,7 +60,7 @@ export class AppointmentsService {
       where: {
         doctor: { id: doctorId },
         appointmentTime: appointmentDate,
-        status: AppointmentStatus.scheduled,
+        status: AppointmentStatus.pending,
       },
     });
 
@@ -73,8 +73,9 @@ export class AppointmentsService {
       doctor,
       patient,
       appointmentTime: appointmentDate,
-      status: AppointmentStatus.scheduled,
-      paymentStatus: false,
+      status: AppointmentStatus.pending,
+      amount: amount || 0,
+      isPaid: false,
       reason,
     });
 
@@ -123,6 +124,7 @@ export class AppointmentsService {
       where: {
         doctor: { id: doctorId },
         appointmentTime: Between(today, tomorrow),
+        status: AppointmentStatus.confirmed,
       },
       relations: ['patient'],
       order: { appointmentTime: 'ASC' },

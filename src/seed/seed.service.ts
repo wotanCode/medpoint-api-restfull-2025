@@ -1,26 +1,24 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-
 import { Repository } from 'typeorm';
-
-import { AuthService } from '../auth/auth.service';
 import { User } from '../auth/entities/user.entity';
 import { Appointment } from '../appointments/entities/appointment.entity';
+import { Payment } from '../payments/entities/payment.entity';
 
+import { AuthService } from '../auth/auth.service';
 import { initialData } from './data/seed-data';
 
 @Injectable()
 export class SeedService {
-
   constructor(
     private readonly usersService: AuthService,
-
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
-
     @InjectRepository(Appointment)
     private readonly appointmentRepository: Repository<Appointment>,
-  ) { }
+    @InjectRepository(Payment)
+    private readonly paymentRepository: Repository<Payment>,
+  ) {}
 
   async runSeed() {
     await this.deleteTables();
@@ -30,8 +28,14 @@ export class SeedService {
     return 'SEED EXECUTED';
   }
 
-  // Mantener integridad referencial: primero borrar citas, luego usuarios
+  // Mantener integridad referencial: primero borrar pagos, luego citas, luego usuarios
   private async deleteTables() {
+    // Eliminar todos los pagos existentes
+    await this.paymentRepository.createQueryBuilder()
+      .delete()
+      .where({})
+      .execute();
+
     // Eliminar todas las citas existentes
     await this.appointmentRepository.createQueryBuilder()
       .delete()
@@ -58,5 +62,4 @@ export class SeedService {
 
     return dbUsers[0];
   }
-
 }

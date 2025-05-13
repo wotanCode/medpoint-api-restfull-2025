@@ -4,25 +4,38 @@ import {
   Column,
   OneToOne,
   JoinColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { Appointment } from '../../appointments/entities/appointment.entity';
-import { PaymentStatus } from 'src/interfaces';
 
 @Entity('payments')
 export class Payment {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @OneToOne(() => Appointment)
-  @JoinColumn({ name: 'appointment_id' })
-  appointment: Appointment;
-
-  @Column('float', { default: 100})
+  @Column('decimal', { precision: 10, scale: 2 })
   amount: number;
 
-  @Column({ type: 'timestamp', name: 'payment_time' })
-  paymentTime: Date;
+  @Column()
+  paymentMethod: string;
 
-  @Column({ type: 'enum', enum: PaymentStatus })
-  status: PaymentStatus;
+  @Column()
+  paymentId: string;
+
+  @Column({ nullable: true })
+  status: string;
+
+  @Column({ nullable: true })
+  errorMessage: string;
+
+  @OneToOne(() => Appointment, appointment => appointment.payment)
+  @JoinColumn()
+  appointment: Appointment;
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
 }
