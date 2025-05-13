@@ -103,7 +103,7 @@ Al ejecutar el **seed**, se insertarán los siguientes usuarios de prueba en la 
 | **Patient 3** | `elias.torres@example.com`   | `Abcd1234`   |
 | **Patient 4** | `fatima.gonzalez@example.com`| `Abcd1234`   |
 
-Utiliza estos usuarios para realizar pruebas de autenticación y roles dentro de la API. Recuerda iniciar sesión con alguno de los usuarios de prueba para poder probar los distintos servicios, ya que todos requieren autenticación y algunos requieren diferentes tipos de autorización.
+Utiliza estos usuarios para realizar pruebas de autenticación y roles dentro de la API. Recuerda iniciar sesión con alguno de los usuarios de prueba para poder probar los distintos servicios, ya que todos requieren autenticación y algunos requieren diferentes tipos de autorización. Al hacer el login, estos regresan un Bearer Token con el cual podras consumir los distintos servicios.
 
 <!-- ## 🧪 Pruebas
 
