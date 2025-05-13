@@ -5,7 +5,6 @@ import { Auth, GetUser } from './decorators';
 import { ValidRoles } from 'src/interfaces';
 import { User } from './entities/user.entity';
 
-// TODO: Cambiar a users/auth
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: AuthService) { }
