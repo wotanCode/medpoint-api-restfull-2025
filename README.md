@@ -105,6 +105,18 @@ Al ejecutar el **seed**, se insertarán los siguientes usuarios de prueba en la 
 
 Utiliza estos usuarios para realizar pruebas de autenticación y roles dentro de la API. Recuerda iniciar sesión con alguno de los usuarios de prueba para poder probar los distintos servicios, ya que todos requieren autenticación y algunos requieren diferentes tipos de autorización. Al hacer el login, estos regresan un Bearer Token con el cual podras consumir los distintos servicios.
 
+---
+
+## 📑 Documentación de la API (Swagger)
+
+Para consultar la documentación completa de todos los endpoints disponibles, puedes acceder a la interfaz de **Swagger UI**, la cual te permitirá explorar y probar la API de manera interactiva.
+
+Accede a la documentación en el siguiente enlace:
+
+[http://localhost:3000/api](http://localhost:3000/api)
+
+---
+
 <!-- ## 🧪 Pruebas
 
 ```bash
@@ -137,7 +149,7 @@ npm run test:cov
 
 > Todos los endpoints requieren autenticación mediante token en el header. -->
 
----
+<!-- --- -->
 
 ## 👮‍♂️ Roles y permisos
 
