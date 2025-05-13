@@ -7,7 +7,9 @@ import { ValidRoles } from 'src/interfaces';
 export class SeedController {
   constructor(private readonly seedService: SeedService) { }
 
-  // Solo un admin puede ejecutar el seed
+  // Solo un admin puede ejecutar el seed, pero deje
+  // la linea comentada para que cualquiera pueda probar
+  // con mayor comodidad.
   @Get()
   // @Auth(ValidRoles.admin)
   executeSeed() {
