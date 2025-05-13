@@ -1,8 +1,11 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, ParseUUIDPipe } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { CreateUserDto, UpdateUserDto, LoginUserDto } from './dto';
+import { Auth, GetUser } from './decorators';
+import { ValidRoles } from 'src/interfaces';
+import { User } from './entities/user.entity';
 
+// TODO: Cambiar a users/auth
 @Controller('auth')
 export class UsersController {
   constructor(private readonly usersService: AuthService) { }
@@ -15,11 +18,18 @@ export class UsersController {
 
   // Login del usuario
   @Post('login')
-  loginUser(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.loginUser(createUserDto);
+  loginUser(@Body() loginUserDto: LoginUserDto) {
+    return this.usersService.loginUser(loginUserDto);
+  }
+
+  @Get('check-status')
+  @Auth()
+  checkAuthStatus(@GetUser() user: User) {
+    return this.usersService.checkAuthStatus(user);
   }
 
   @Get()
+  @Auth(ValidRoles.doctor, ValidRoles.admin)
   findAll() {
     return this.usersService.findAll();
   }

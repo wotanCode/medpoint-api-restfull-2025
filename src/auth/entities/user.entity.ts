@@ -44,12 +44,6 @@ export class User {
   @Column({ length: 255, nullable: true })
   address?: string;
 
-  @Column({ nullable: true })
-  token?: string;
-
-  @Column({ type: 'timestamp', name: 'token_created_at', nullable: true })
-  tokenCreatedAt?: Date;
-
   // Relación con citas como paciente
   @OneToMany(() => Appointment, appointment => appointment.patient)
   appointmentsAsPatient: Appointment[];
@@ -62,6 +56,7 @@ export class User {
   @BeforeInsert()
   @BeforeUpdate()
   validateEmail() {
+    this.email = this.email.toLowerCase().trim();
     const validCharacters = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!this.email || !validCharacters.test(this.email)) {
       throw new BadRequestException('The email must be valid');

@@ -1,38 +1,50 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+
+import { Repository } from 'typeorm';
+
 import { AuthService } from '../auth/auth.service';
+import { User } from '../auth/entities/user.entity';
 
 import { initialData } from './data/seed-data';
-import { User } from 'src/auth/entities/user.entity';
 
 @Injectable()
 export class SeedService {
 
   constructor(
-    private readonly usersService: AuthService
+    private readonly usersService: AuthService,
+
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>,
   ) { }
 
   async runSeed() {
-
+    await this.deleteTables();
     await this.insertSeedtUsers();
 
-    return 'seed executed';
+    return 'SEED EXECUTED';
+  }
+
+  //mantener integridad referencia, primero borrar pagos luego citas, luegp pacientes
+  private async deleteTables() {
+    await this.usersService.deleteAllUsers();
+
+    const queryBuilder = this.userRepository.createQueryBuilder();
+    await queryBuilder.delete().where({}).execute();
   }
 
   private async insertSeedtUsers() {
-    // Borramos todos los usuarios anteriores
-    await this.usersService.deleteAllUsers();
+    const seedUsers = initialData.users;
 
-    const users = initialData.users;
+    const users: User[] = [];
 
-    const insertPromises: Promise<User>[] = [];
-
-    users.forEach(user => {
-      insertPromises.push(this.usersService.createUser(user));
+    seedUsers.forEach((user) => {
+      users.push(this.userRepository.create(user));
     });
 
-    await Promise.all(insertPromises);
+    const dbUsers = await this.userRepository.save(seedUsers);
 
-    return true;
+    return dbUsers[0];
   }
 
 }

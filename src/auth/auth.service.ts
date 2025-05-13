@@ -1,13 +1,15 @@
-import { BadRequestException, Injectable, InternalServerErrorException, Logger, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, InternalServerErrorException, Logger, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { JwtService } from '@nestjs/jwt';
+
 import { Repository } from 'typeorm';
 
 import { validate as isUUID } from 'uuid';
 import * as bcrypt from 'bcrypt';
 
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { CreateUserDto, UpdateUserDto, LoginUserDto } from './dto';
 import { User } from './entities/user.entity';
+import { JwtPayload } from './interfaces';
 
 @Injectable()
 export class AuthService {
@@ -18,11 +20,12 @@ export class AuthService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
+    private readonly jwtService: JwtService,
   ) { }
 
 
   // Registramos un usuario
-  async createUser(createUserDto: CreateUserDto): Promise<User> {
+  async createUser(createUserDto: CreateUserDto) {
     try {
 
       // Encriptamos la contraseña
@@ -35,32 +38,42 @@ export class AuthService {
 
       await this.userRepository.save(user);
       // delete user.password;
-      return user;
+      return {
+        ...user,
+        token: this.getJwtToken({ id: user.id }),
+      };
     } catch (error) {
       this.handleDBExceptions(error);
       throw error;
     }
   }
 
-  // Registramos un usuario
-  async loginUser(createUserDto: CreateUserDto): Promise<User> {
-    try {
+  // Login del usuario
+  async loginUser(loginUserDto: LoginUserDto) {
+    const { password, email } = loginUserDto;
 
-      // Encriptamos la contraseña
-      const { password, ...userData } = createUserDto;
+    const user = await this.userRepository.findOne({
+      where: { email },
+      select: { email: true, password: true, id: true },
+    });
 
-      const user = this.userRepository.create({
-        ...userData,
-        password: bcrypt.hashSync(password, 10),
-      });
+    if (!user)
+      throw new UnauthorizedException('Credentials are not valid (email)');
 
-      await this.userRepository.save(user);
-      // delete user.password;
-      return user;
-    } catch (error) {
-      this.handleDBExceptions(error);
-      throw error;
-    }
+    if (!bcrypt.compareSync(password, user.password))
+      throw new UnauthorizedException('Credentials are not valid (password)');
+
+    return {
+      ...user,
+      token: this.getJwtToken({ id: user.id }),
+    };
+  }
+
+  async checkAuthStatus(user: User) {
+    return {
+      ...user,
+      token: this.getJwtToken({ id: user.id }),
+    };
   }
 
   // Todos los usuarios
@@ -113,6 +126,12 @@ export class AuthService {
       .delete()
       .where({})
       .execute();
+  }
+
+  // Token
+  private getJwtToken(payload: JwtPayload) {
+    const token = this.jwtService.sign(payload);
+    return token;
   }
 
   // Manejo de errores de la bd
