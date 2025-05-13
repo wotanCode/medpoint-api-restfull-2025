@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 
 import { AuthService } from '../auth/auth.service';
 import { User } from '../auth/entities/user.entity';
+import { Appointment } from '../appointments/entities/appointment.entity';
 
 import { initialData } from './data/seed-data';
 
@@ -16,17 +17,28 @@ export class SeedService {
 
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
+
+    @InjectRepository(Appointment)
+    private readonly appointmentRepository: Repository<Appointment>,
   ) { }
 
   async runSeed() {
     await this.deleteTables();
     await this.insertSeedtUsers();
 
+    // Crea solamente usuarios de prueba, pero no crea citas ni pagos
     return 'SEED EXECUTED';
   }
 
-  //mantener integridad referencia, primero borrar pagos luego citas, luegp pacientes
+  // Mantener integridad referencial: primero borrar citas, luego usuarios
   private async deleteTables() {
+    // Eliminar todas las citas existentes
+    await this.appointmentRepository.createQueryBuilder()
+      .delete()
+      .where({})
+      .execute();
+
+    // Eliminar todos los usuarios
     await this.usersService.deleteAllUsers();
 
     const queryBuilder = this.userRepository.createQueryBuilder();

@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { User } from '../entities/user.entity';
 import { META_ROLES } from '../decorators/role-protected.decorator';
 
+// Guard que verifica si el usuario tiene los roles necesarios para acceder a una ruta
 @Injectable()
 export class UserRoleGuard implements CanActivate {
   constructor(private readonly reflector: Reflector) { }

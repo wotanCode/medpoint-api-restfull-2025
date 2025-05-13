@@ -8,6 +8,7 @@ import { Repository } from 'typeorm';
 import { User } from '../entities/user.entity';
 import { JwtPayload } from '../interfaces/jwt-payload.interface';
 
+// Estrategia para validar tokens JWT y obtener el usuario autenticado
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(
