@@ -217,6 +217,117 @@ src/
 
 --- -->
 
+--- 
+
+## 🧪 Ejemplo caso de uso
+
+### 🔧 1. Preparación Inicial
+
+```bash
+# 1. Asegúrate de que la base de datos esté corriendo
+# 2. Ejecuta el seed para tener una base de datos limpia
+GET http://localhost:3000/api/seed
+```
+
+### 🔧 2. Flujo de Prueba
+
+#### a) Iniciar sesión como paciente
+```bash
+POST http://localhost:3000/api/auth/login
+{
+  "email": "charlie@mymail.com",
+  "password": "Abcd1234"
+}
+```
+Guarda el token que recibas.
+
+#### b) Crear una cita (usando el token del paciente)
+```bash
+POST http://localhost:3000/api/appointments
+Headers: 
+- Authorization: Bearer <token-del-paciente>
+
+Body:
+{
+  "doctorId": "id-del-doctor",
+  "appointmentTime": "2024-03-20T10:00:00Z",
+  "reason": "Consulta de rutina",
+  "amount": 50.00
+}
+```
+Guarda el ID de la cita creada.
+
+#### c) Procesar el pago (usando el token del paciente)
+```bash
+POST http://localhost:3000/api/payments/process
+Headers: 
+- Authorization: Bearer <token-del-paciente>
+
+Body:
+{
+  "appointmentId": "id-de-la-cita-creada",
+  "paymentMethod": "card",
+  "paymentToken": "tok_visa"  // Token de prueba de Stripe
+}
+```
+
+#### d) Verificar el estado de la cita (usando el token del paciente)
+```bash
+GET http://localhost:3000/api/appointments/mine
+Headers: 
+- Authorization: Bearer <token-del-paciente>
+```
+
+#### e) Ver detalles del pago (usando token de admin o doctor)
+```bash
+GET http://localhost:3000/api/payments/:id-del-pago
+Headers: 
+- Authorization: Bearer <token-de-admin-o-doctor>
+```
+
+### 🔧 3. Tokens de Prueba de Stripe
+
+- `tok_visa`: Pago exitoso
+- `tok_chargeDeclined`: Pago rechazado
+- `tok_chargeCustomerFail`: Error en el procesamiento
+
+### 🔧 4. Usuarios de Prueba
+
+- Admin: `admin@admin.com` / `Admin1234`
+- Doctor: `bob.doctor@example.com` / `Doctor1234`
+- Paciente: `charlie@mymail.com` / `Abcd1234`
+
+### 🔧 5. Verificación de Estados
+
+- La cita debe cambiar de `pending` a `paid` después del pago exitoso
+- Debe crearse un registro en la tabla de pagos
+- El doctor y admin deben poder ver los detalles del pago
+
+### 🔧 6. Notas Importantes
+
+1. Los tokens de prueba de Stripe (`tok_visa`, etc.) son valores fijos que siempre funcionarán en el entorno de pruebas.
+2. Para ver los detalles de un pago, puedes usar:
+   - El ID de Stripe (ejemplo: `ch_3ROHbuQ7dYv9g8xd1ZcJQdyt`)
+   - El UUID de nuestra base de datos
+3. La respuesta de un pago exitoso incluirá:
+   ```json
+   {
+     "success": true,
+     "paymentId": "ch_3ROHbuQ7dYv9g8xd1ZcJQdyt",
+     "amount": 50.00,
+     "status": "succeeded"
+   }
+   ```
+
+### 🔧 7. Posibles Errores
+
+1. **Pago ya realizado**: Si intentas pagar una cita que ya está pagada
+2. **Token inválido**: Si usas un token de prueba incorrecto
+3. **Permisos insuficientes**: Si intentas acceder a endpoints sin el rol adecuado
+4. **Cita no encontrada**: Si el ID de la cita no existe 
+
+---
+
 ## 🧰 Tecnologías usadas
 
 - [![NestJS][nestjs-badge]][nestjs-url] Framework para construir aplicaciones server-side eficientes y escalables.
