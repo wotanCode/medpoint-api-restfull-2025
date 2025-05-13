@@ -1,1 +1,1 @@
-export class CreateAppointmentDto {}
+export class CreateAppointmentDto { }

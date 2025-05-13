@@ -10,4 +10,4 @@ import { Payment } from './entities/payment.entity';
   providers: [PaymentsService],
   imports: [TypeOrmModule.forFeature([Payment])],
 })
-export class PaymentsModule {}
+export class PaymentsModule { }

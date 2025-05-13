@@ -5,7 +5,7 @@ import { UpdateAppointmentDto } from './dto/update-appointment.dto';
 
 @Controller('appointments')
 export class AppointmentsController {
-  constructor(private readonly appointmentsService: AppointmentsService) {}
+  constructor(private readonly appointmentsService: AppointmentsService) { }
 
   @Post()
   create(@Body() createAppointmentDto: CreateAppointmentDto) {

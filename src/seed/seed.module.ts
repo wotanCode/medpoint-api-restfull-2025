@@ -10,4 +10,4 @@ import { SeedController } from './seed.controller';
   providers: [SeedService],
   imports: [AuthModule]
 })
-export class SeedModule {}
+export class SeedModule { }
