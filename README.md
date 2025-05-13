@@ -90,6 +90,21 @@ npm run start:prod
 
 ---
 
+## 👥 Usuarios de prueba
+
+Al ejecutar el **seed**, se insertarán los siguientes usuarios de prueba en la base de datos:
+
+| Rol     | Email                           | Contraseña   |
+|---------|----------------------------------|--------------|
+| **Admin** | `admin@admin.com`              | `Admin1234`  |
+| **Doctor** | `bob.doctor@example.com`      | `Doctor1234` |
+| **Patient 1** | `charlie@mymail.com`        | `Abcd1234`   |
+| **Patient 2** | `diana.rivera@example.com`   | `Abcd1234`   |
+| **Patient 3** | `elias.torres@example.com`   | `Abcd1234`   |
+| **Patient 4** | `fatima.gonzalez@example.com`| `Abcd1234`   |
+
+Utiliza estos usuarios para realizar pruebas de autenticación y roles dentro de la API. Recuerda iniciar sesión con alguno de los usuarios de prueba para poder probar los distintos servicios, ya que todos requieren autenticación y algunos requieren diferentes tipos de autorización.
+
 <!-- ## 🧪 Pruebas
 
 ```bash
