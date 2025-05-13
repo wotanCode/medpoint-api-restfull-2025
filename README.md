@@ -2,6 +2,12 @@
 
 API Restful desarrollada con **NestJS** que permite la gestión de citas médicas para pacientes y médicos.
 
+<p align="center">
+  <img src="https://nestjs.com/img/logo-small.svg" alt="NestJS Logo" width="80">
+</p>
+
+NestJS es un framework progresivo para construir aplicaciones del lado del servidor. Su estructura basada en módulos, su compatibilidad con TypeScript y el seguimiento estricto de patrones como MVC y DI (inyección de dependencias) lo hacen ideal para proyectos escalables, mantenibles y bien organizados.
+
 ---
 
 ## 📌 Características principales
@@ -13,7 +19,7 @@ API Restful desarrollada con **NestJS** que permite la gestión de citas médica
 * 📚 Agenda completa por paciente con validaciones de horario y solapamientos.
 * 🔐 Autenticación mediante tokens simples.
 * ⚖️ Control de roles: paciente y médico.
-* 🧪 Pruebas unitarias completas con cobertura.
+<!-- * TODO: 🧪 Pruebas unitarias completas con cobertura. -->
 
 ---
 
@@ -122,8 +128,9 @@ npm run test:cov
 
 | Rol      | Permisos                                     |
 | -------- | -------------------------------------------- |
-| Paciente | Solicitar y pagar citas. Ver su historial.   |
-| Médico   | Confirmar/rechazar citas, ver agenda diaria. |
+| admin    | Control completo                             |
+| doctor   | Confirmar/rechazar citas, ver agenda diaria. |
+| patient  | Solicitar y pagar citas. Ver su historial.   |
 
 ---
 
@@ -138,33 +145,32 @@ npm run test:cov
 
 ## 🔐 Autenticación
 
-- TODO
-<!-- * Se utiliza un esquema de token simple en los headers:
+Este proyecto utiliza un sistema de autenticación basado en **JWT (JSON Web Tokens)**.
 
-  ```
-  Authorization: Bearer <token>
-  ```
-* Los tokens pueden ser generados manualmente para pruebas o provistos vía configuración. -->
+- NestJS proporciona los mecanismos necesarios para generar, firmar y validar tokens.
+- El token contiene información del usuario y su rol, permitiendo un control de acceso eficiente.
+- La caducidad del token está configurada por defecto en **8 horas**.
 
----
+> ⚙️ Podés ajustar el tiempo de expiración o la lógica de autenticación modificando la configuración en el módulo de autenticación
 
-## 🧱 Base de datos
+## 🧱 Base de Datos
 
-* Base utilizada: **PostgreSQL**
-<!-- * El script de creación de base de datos se encuentra en: `scripts/init.sql` -->
+Este proyecto utiliza **PostgreSQL** (versión 14.3) como sistema de gestión de base de datos.
 
-<!-- Tablas principales:
+### 📌 Detalles de conexión:
 
-* `users` (médicos y pacientes)
-* `appointments`
-* `payments`
-* `tokens` (opcional para autenticación)
+| Parámetro  | Valor               |
+|------------|---------------------|
+| Nombre     | `medpointdb`        |
+| Host       | `localhost`         |
+| Puerto     | `5432`              |
+| Usuario    | `postgres`          |
+| Contraseña | `mysecretpassword`  |
 
---- -->
 
-## 📁 Estructura del proyecto
+<!-- ## 📁 Estructura del proyecto
 
-- TODO
+- TODO -->
 <!-- 
 ```
 src/
